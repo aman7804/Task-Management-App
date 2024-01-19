@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, IconButton, Typography, Stack, Button, Menu, MenuItem } from '@mui/material'
 import { CatchingPokemon } from '@mui/icons-material'
 import {useState} from 'react'
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -11,18 +12,17 @@ export const Navbar = () => {
     const handleClose = () =>{
         setAnchorEl(null)
     }
+      
     return (
         <div>
-            <AppBar>
+            <AppBar position='fixed'>
                 <Toolbar>
                     <IconButton size="large" edge="start" color='inherit' aria-label='logo'>
                         <CatchingPokemon />
                     </IconButton>
-                    <Typography variant='h6' component='div' sx={{flexGrow: 1}}>
-                        MyTask
-                    </Typography>
+                        <Typography variant='h6' color='inherit' component={Link} to='/' sx={{flexGrow: 1, textDecoration: 'none'}}> MyTask </Typography>
                     <Stack direction='row' spacing={2}>
-                        <Button color='inherit'> About</Button>
+                        <Button color='inherit' component={Link} to='/about'> About </Button>
                         <Button
                             color='inherit'
                             id='resources-button'
@@ -33,8 +33,8 @@ export const Navbar = () => {
                         >
                             Resources
                         </Button>
-                        <Button color='inherit'> Signup</Button>
-                        <Button color='inherit'> login</Button>
+                        <Button color='inherit' component={Link} to='/signup'> Signup</Button>
+                        <Button color='inherit' component={Link} to='/login'> login</Button>
                     </Stack>
                     <Menu
                         id='resources-menu'
