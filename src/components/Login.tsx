@@ -7,15 +7,25 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+// import LoginCredentials from "../Interfaces/LoginCredentials";
+// import authenticateUser from "../apis/AuthApi";
 
 const Login = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    // event.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    
+    // const loginCredentials : LoginCredentials = {
+    //   EmailId: data.get("email")?.toString() ?? null,
+    //   Password: data.get("password")?.toString() ?? null
+    // }
+    
+    // await authenticateUser(loginCredentials)
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+    
   };
 
   return (

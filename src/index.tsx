@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import About from './components/About';
@@ -9,9 +8,10 @@ import Home from './components/Home'
 import Task from './components/CreateTask';
 import TaskList from './components/TaskList'
 import { Provider } from 'react-redux';
-import store from './state/Store';
 import  Login  from './components/Login';
 import SignUp from './components/Signup';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -35,10 +35,12 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider
-        router={router}
-        fallbackElement={"Loading"}
-      />
+      <PersistGate persistor={persistor}>
+        <RouterProvider
+          router={router}
+          fallbackElement={"Loading"}
+        />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 )
