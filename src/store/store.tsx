@@ -1,23 +1,20 @@
-import { Store, combineReducers, createStore } from "redux"
-import reducer from "./reducer"
-import storage from "redux-persist/lib/storage";
-// import { ActionTypes, TaskState } from "./types"
-import { persistStore, persistReducer } from 'redux-persist'
-import { IAppState } from "./types";
+import { Store, applyMiddleware, combineReducers, createStore } from "redux"
+// import taskReducer from "./task/reducer"
+import sagaMiddleware from "./rootSaga";
+import authReducer from './auth/reducer'
+import { rootSaga } from "./rootSaga";
+import taskReducer from "./task/reducer";
+import { TaskActions } from "./task/types";
+import { AuthActions } from "./auth/types";
 
-const persistConfig = {
-    key: 'root',
-    storage,
-}
-
-// const rootReducer = combineReducers<IAppState>({
-//     tasks : reducer
+// const rootReducer = combineReducers({
+//     auth: authReducer,
+//     tasks : taskReducer,
 // });
-// type typeOfRootReducer = ReturnType<typeof rootReducer>
 
-const persistedReducer = persistReducer(persistConfig, reducer)
-const store: Store  = createStore(persistedReducer)
+// const store  = createStore<RootState, TaskActions|AuthActions>(rootReducer, applyMiddleware(sagaMiddleware))
+const store  = createStore(authReducer, applyMiddleware(sagaMiddleware))
+sagaMiddleware.run(rootSaga)
 
-// const store = createStore(rootReducer)
-const persistor = persistStore(store)
-export {store, persistor}
+export default store
+export type RootState = ReturnType<typeof authReducer>  

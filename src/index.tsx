@@ -8,10 +8,10 @@ import Home from './components/Home'
 import Task from './components/CreateTask';
 import TaskList from './components/TaskList'
 import { Provider } from 'react-redux';
-import  Login  from './components/Login';
+import  {Login}  from './components/Login';
 import SignUp from './components/Signup';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store/store';
+import store from './store/store'
+// import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -35,12 +35,12 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      {/* <PersistGate persistor={persistor}> */}
         <RouterProvider
           router={router}
           fallbackElement={"Loading"}
         />
-      </PersistGate>
+      {/* </PersistGate> */}
     </Provider>
   </React.StrictMode>
 )

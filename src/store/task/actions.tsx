@@ -1,4 +1,4 @@
-import {ADD_TASK, DELETE_TASK} from './actionTypes'
+import {ADD_TASK, DELETE_TASK} from '../actionTypes'
 import { ActionTypes, ITask} from './types'
 
 

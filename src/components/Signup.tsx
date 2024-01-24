@@ -12,35 +12,38 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-// const Copyright = (props) => {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
+import { SignupPayload } from "../store/auth/types";
+import { signupRequest } from "../store/auth/actions";
+import { useDispatch } from "react-redux";
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = new FormData(event.currentTarget);
+    const callback = (data: any) => console.log("signup working");
+    
+    
+    let email = formData.get("email")?.toString()
+    let password = formData.get("password")?.toString()
+    let firstName = formData.get("firstName")?.toString()
+    let lastName = formData.get("lastName")?.toString()
+    
+    if(email !== undefined && password !== undefined && firstName!==undefined && lastName!==undefined){
+      let data: SignupPayload = {
+        values: {
+          EmailId: email,
+          Password: password,
+          FirstName: firstName,
+          LastName: lastName
+        },
+        callback,
+      };
+      dispatch({...signupRequest(data)})
+    }
   };
 
   return (

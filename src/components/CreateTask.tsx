@@ -6,13 +6,14 @@ import {
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { addTask } from "../store/actionCreators";
+import { addTask } from "../store/task/actions";
 
 const CreateTask = () => {
   const dispatch = useDispatch();
   let [task, setTask] = useState<string>("");
 
-  const handleClick = () => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch({...addTask(task)})
     setTask("")
   }
@@ -23,10 +24,10 @@ const CreateTask = () => {
         
     return (
       <>
-          <Box sx={{mt:10}}>
+          <Box component={'form'} onSubmit={(e)=>{handleOnSubmit(e)}} sx={{mt:10}}>
               <Stack direction={'row'} spacing={3} sx={{mx:'auto', width:500}}>
                   <TextField size="small" id="outlined-basic" label="note" variant="outlined" value={task} onChange={(e)=>handleOnChange(e)} sx={{width: 400}}/>
-                  <Button variant="contained" color="primary" onClick={handleClick}> save </Button>
+                  <Button variant="contained" color="primary"> save </Button>
               </Stack>
           </Box>
       </>
