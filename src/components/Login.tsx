@@ -7,25 +7,30 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-// import LoginCredentials from "../Interfaces/LoginCredentials";
-// import authenticateUser from "../apis/AuthApi";
+import { useDispatch } from "react-redux";
+import { loginRequest } from "../store/auth/actions";
+import { LoginPayload } from "../store/auth/types";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    // event.preventDefault();
-    // const data = new FormData(event.currentTarget);
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const callback = (data: any) => console.log("login working");
     
-    // const loginCredentials : LoginCredentials = {
-    //   EmailId: data.get("email")?.toString() ?? null,
-    //   Password: data.get("password")?.toString() ?? null
-    // }
     
-    // await authenticateUser(loginCredentials)
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
+    let email = formData.get("email")?.toString()
+    let password = formData.get("password")?.toString()
     
+    if(email !== undefined && password !== undefined){
+      let data: LoginPayload = {
+        values: { EmailId: email, Password: password },
+        callback,
+      };
+      dispatch({...loginRequest(data)})
+    }
   };
 
   return (
@@ -44,7 +49,7 @@ const Login = () => {
         <Box component="form" onSubmit={(event)=>handleSubmit(event)} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
-            required
+            required={true}
             fullWidth
             id="email"
             label="Email Address"
@@ -54,7 +59,7 @@ const Login = () => {
           />
           <TextField
             margin="normal"
-            required
+            required={true}
             fullWidth
             name="password"
             label="Password"
@@ -81,7 +86,7 @@ const Login = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link component={NavLink} to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
@@ -91,5 +96,4 @@ const Login = () => {
     </Container>
   );
 }
-
-export default Login
+export {Login}

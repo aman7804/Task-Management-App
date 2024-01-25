@@ -18,6 +18,6 @@ interface TypeDeleteAction extends Action{
     payload: ITask
 }
 
-export type ActionTypes = 
+export type TaskActions = 
     | TaskAddAction
     | TypeDeleteAction
