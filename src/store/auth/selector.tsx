@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import{ RootState } from '../store'
+import{ RootState } from '..'
 
 const getPending = (state:RootState)=> state.pending
 const getError = (state:RootState) => state.error

@@ -2,7 +2,7 @@ import { Button, List, ListItem, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { IAppState } from '../store/task/types'
 import { deleteTask } from '../store/task/actions'
-import { RootState } from '../store/store'
+import { RootState } from '../store'
 import { getAuthSelector } from '../store/auth/selector'
 
 

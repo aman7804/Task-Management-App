@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../store/auth/actions";
 import { LoginPayload } from "../store/auth/types";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,6 @@ const Login = () => {
       };
       dispatch({...loginRequest(data)})
     }
-
   };
 
   return (
@@ -86,7 +86,7 @@ const Login = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link component={NavLink} to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
